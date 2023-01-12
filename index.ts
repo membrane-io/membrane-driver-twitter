@@ -37,8 +37,8 @@ export const Root = {
   },
   configure: async ({ args: { APP_KEY, APP_SECRET } }) => {
     state.endpointUrl = state.endpointUrl ?? (await nodes.endpoint.$get());
-    state.appId = state.appId ?? APP_KEY;
-    state.appSecret = state.appSecret ?? APP_SECRET;
+    state.appId = APP_KEY;
+    state.appSecret = APP_SECRET;
   },
   tweet: async ({ args }) => {
     let poll = {};
