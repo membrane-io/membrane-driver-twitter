@@ -1,6 +1,6 @@
 # Twitter Driver
 
-An [Membrane.io](https://membrane.io/) driver for Twitter.
+A [Membrane.io](https://membrane.io/) driver for Twitter.
 
 ## Usage
 
@@ -16,9 +16,9 @@ Configure [APP KEY and APP SECRET](https://developer.twitter.com/en/portal/regis
 
 $~~~~$`mctl action "twitter:configure(APP_KEY: '<string>', APP_SECRET: '<string>')"`
 
-Create a tweet (also support for polls)
+Create a tweet (it also support polls!)
 
-$~~~~$`mctl action "twitter:tweet(text: 'Hi!')"`
+$~~~~$`mctl action "twitter:tweet(text:'Hi!')"`
 
 # Schema
 
