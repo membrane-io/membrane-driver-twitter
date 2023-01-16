@@ -1,7 +1,7 @@
 import { state } from "membrane";
 import fetch from "node-fetch";
-import OAuth from "oauth-1.0a";
-import hash from "jshashes";
+
+const api_url = "https://api.twitter.com"
 
 export async function api(
   method: string,
@@ -9,16 +9,6 @@ export async function api(
   query?: any,
   body?: string
 ): Promise<any> {
-  // Set up OAuth SHA1
-  const oauth = new OAuth({
-    consumer: {
-      key: state.appId,
-      secret: state.appSecret,
-    },
-    signature_method: "HMAC-SHA1",
-    hash_function: (baseString, key) => new hash.SHA1().b64_hmac(key, baseString),
-  });
-
   // setup querystring 
   if (query) {
     Object.keys(query).forEach((key) =>
@@ -26,23 +16,13 @@ export async function api(
     );
   }
   const querystr = query && Object.keys(query).length ? `?${new URLSearchParams(query)}` : "";
-  const url = `https://api.twitter.com/${path}${querystr}`;
-
-  // add params to headers
-  const token = state.access || {};
-  const authHeader = await oauth.toHeader(
-    oauth.authorize({
-      url: url,
-      method,
-    }, token)
-  );
-
+  const url = `${api_url}/${path}${querystr}`;
   // make request
   const req = {
     method,
     body,
     headers: {
-      Authorization: authHeader["Authorization"],
+      Authorization: `Bearer ${state.access_token}`,
       "content-type": "application/json",
     },
   };
@@ -57,8 +37,29 @@ export type ResolverInfo = {
   }[];
 };
 
+export async function getBearerToken(code) {
+  const url = new URL(`${api_url}/2/oauth2/token`);
+  const params = new URLSearchParams(url.search);
+  params.append("code", code);
+  params.append("grant_type", "authorization_code");
+  params.append("client_id", state.client_id);
+  params.append("redirect_uri", `${state.endpointUrl}/callback`);
+  params.append("code_verifier", state.code_challenge);
+  const req = {
+    method: "POST",
+    body: params.toString(),
+    headers: {
+      Authorization:
+        `Basic ${Buffer.from(`${state.client_id}:${state.client_secret}`).toString('base64')}`,
+        "Content-Type": "application/x-www-form-urlencoded",
+    },
+  };
+  const res = await fetch(`${api_url}/2/oauth2/token`, req);
+  return await res.json();
+}
+
 // Parse Query String
-export const parseQueryString = (search: string): Record<string, string> =>
+export const parseQS = (search: string): Record<string, string> =>
   (search || '')
     .replace(/^\?/g, '')
     .split('&')

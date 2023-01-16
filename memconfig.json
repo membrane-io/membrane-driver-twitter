@@ -13,20 +13,6 @@
         "name": "Root",
         "actions": [
           {
-            "name": "configure",
-            "type": "Void",
-            "params": [
-              {
-                "name": "APP_KEY",
-                "type": "String"
-              },
-              {
-                "name": "APP_SECRET",
-                "type": "String"
-              }
-            ]
-          },
-          {
             "name": "tweet",
             "type": "Void",
             "params": [
@@ -34,7 +20,6 @@
                 "name": "text",
                 "type": "String"
               },
-
               {
                 "name": "poll_options",
                 "type": "String",
@@ -75,6 +60,20 @@
                 "type": "String"
               }
             ]
+          },
+          {
+            "name": "configure",
+            "type": "Void",
+            "params": [
+              {
+                "name": "CLIENT_ID",
+                "type": "String"
+              },
+              {
+                "name": "CLIENT_SECRET",
+                "type": "String"
+              }
+            ]
           }
         ],
         "fields": [
@@ -82,10 +81,6 @@
             "name": "user",
             "type": "User",
             "params": [
-              {
-                "name": "id",
-                "type": "String"
-              },
               {
                 "name": "username",
                 "type": "String"
@@ -98,40 +93,8 @@
           },
           {
             "name": "tweets",
-            "type": "SearchCollection",
-            "params": [
-
-            ]
-          }
-        ]
-      },
-      {
-        "name": "SearchCollection",
-        "fields": [
-          {
-            "name": "one",
-            "type": "Tweet",
-            "params": [
-              {
-                "name": "id",
-                "type": "String",
-                "description": "The tweet id"
-              }
-            ]
-          },
-          {
-            "name": "page",
-            "type": "TweetPage",
-            "params": [
-              {
-                "name": "query",
-                "type": "String"
-              },
-              {
-                "name": "pagination_token",
-                "type": "String"
-              }
-            ]
+            "type": "TweetCollection",
+            "params": []
           }
         ]
       },
@@ -153,6 +116,10 @@
             "name": "page",
             "type": "TweetPage",
             "params": [
+              {
+                "name": "query",
+                "type": "String"
+              },
               {
                 "name": "pagination_token",
                 "type": "String",
@@ -371,6 +338,9 @@
             "type": "LikingCollection"
           }
         ]
+      },
+      {
+        "name": "MaxRedirectsError"
       }
     ]
   },
