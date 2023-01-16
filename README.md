@@ -8,11 +8,11 @@ Get [Client key and secret](https://developer.twitter.com/en/portal) from twitte
 
 $~~~~$`mctl action "twitter:configure(CLIENT_ID:'<string>',CLIENT_SECRET:'<string>')"`
 
-Create a tweet (it also support polls!)
+Create a tweet
 
 $~~~~$`mctl action "twitter:tweet(text:'Hi!')"`
 
-Create a poll tweet
+Create a tweet poll
 
 $~~~~$`mctl action "twitter:tweet(poll_duration_minutes:60,poll_options:"I’m fine, Not so good",text:"How are you?")"`
 
