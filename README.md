@@ -2,7 +2,7 @@
 
 A [Membrane.io](https://membrane.io/) driver for Twitter.
 
-## Actions
+## Setup
 
 Get [Client key and secret](https://developer.twitter.com/en/portal) from twitter dev portal and setup your [Callback URI](https://developer.twitter.com/en/docs/apps/callback-urls) with the program Endpoint URL.
 
