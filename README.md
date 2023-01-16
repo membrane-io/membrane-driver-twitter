@@ -12,7 +12,7 @@ Create a tweet
 
 $~~~~$`mctl action "twitter:tweet(text:'Hi!')"`
 
-Create a tweet poll
+Create a poll tweet
 
 $~~~~$`mctl action "twitter:tweet(poll_duration_minutes:60,poll_options:"I’m fine, Not so good",text:"How are you?")"`
 
