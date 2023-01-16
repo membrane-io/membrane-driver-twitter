@@ -59,19 +59,8 @@ export async function getBearerToken(code) {
 }
 
 // Parse Query String
-export const parseQS = (search: string): Record<string, string> =>
-  (search || '')
-    .replace(/^\?/g, '')
-    .split('&')
-    .reduce((acc, query) => {
-      const [key, value] = query.split('=');
-
-      if (key) {
-        acc[key] = decodeURIComponent(value);
-      }
-
-      return acc;
-    }, {} as Record<string, string>);
+export const parseQS = (qs: string): Record<string, string> =>
+  Object.fromEntries(new URLSearchParams(qs).entries())
 
 // Determines if a query includes any fields that require fetching a given resource. Simple fields is an array of the
 // fields that can be resolved without fetching
