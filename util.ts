@@ -1,7 +1,7 @@
 import { state } from "membrane";
 import fetch from "node-fetch";
 
-const api_url = "https://api.twitter.com"
+const api_url = "https://api.twitter.com";
 
 export async function api(
   method: string,
@@ -9,13 +9,24 @@ export async function api(
   query?: any,
   body?: string
 ): Promise<any> {
-  // setup querystring 
+  if (!state.client_id || !state.client_secret) {
+    throw new Error(
+      "You must first invoke the configure action with an API key and secret."
+    );
+  }
+  if (!state.access_token) {
+    throw new Error(
+      "Please open the endpoint URL and follow the steps to obtain the access token."
+    );
+  }
+  // setup querystring
   if (query) {
     Object.keys(query).forEach((key) =>
       query[key] === undefined ? delete query[key] : {}
     );
   }
-  const querystr = query && Object.keys(query).length ? `?${new URLSearchParams(query)}` : "";
+  const querystr =
+    query && Object.keys(query).length ? `?${new URLSearchParams(query)}` : "";
   const url = `${api_url}/${path}${querystr}`;
   // make request
   const req = {
@@ -49,9 +60,10 @@ export async function getBearerToken(code) {
     method: "POST",
     body: params.toString(),
     headers: {
-      Authorization:
-        `Basic ${Buffer.from(`${state.client_id}:${state.client_secret}`).toString('base64')}`,
-        "Content-Type": "application/x-www-form-urlencoded",
+      Authorization: `Basic ${Buffer.from(
+        `${state.client_id}:${state.client_secret}`
+      ).toString("base64")}`,
+      "Content-Type": "application/x-www-form-urlencoded",
     },
   };
   const res = await fetch(`${api_url}/2/oauth2/token`, req);
@@ -60,7 +72,7 @@ export async function getBearerToken(code) {
 
 // Parse Query String
 export const parseQS = (qs: string): Record<string, string> =>
-  Object.fromEntries(new URLSearchParams(qs).entries())
+  Object.fromEntries(new URLSearchParams(qs).entries());
 
 // Determines if a query includes any fields that require fetching a given resource. Simple fields is an array of the
 // fields that can be resolved without fetching
@@ -70,4 +82,3 @@ export const shouldFetch = (info: ResolverInfo, simpleFields: string[]) =>
       return selections;
     })
     .some(({ name: { value } }) => !simpleFields.includes(value));
-    

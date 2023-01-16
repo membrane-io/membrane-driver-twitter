@@ -36,7 +36,7 @@ export const Root = {
     state.client_secret = CLIENT_SECRET;
   },
   tweet: async ({ args }) => {
-    let poll = {};
+    let poll;
     if (args.poll_options && args.poll_duration_minutes) {
       poll = {
         // poll options must be comma separated
@@ -47,7 +47,7 @@ export const Root = {
 
     const data = {
       text: args.text,
-      ...(poll && { poll }),
+      ...(poll) && { poll },
     };
     JSON.stringify(
       await api("POST", "2/tweets", {}, JSON.stringify({ ...data }))

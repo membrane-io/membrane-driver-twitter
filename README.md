@@ -12,6 +12,10 @@ Create a tweet (it also support polls!)
 
 $~~~~$`mctl action "twitter:tweet(text:'Hi!')"`
 
+Create a poll tweet
+
+$~~~~$`mctl action "twitter:tweet(poll_duration_minutes:60,poll_options:"I’m fine, Not so good",text:"How are you?")"`
+
 # Schema
 
 ### Types
