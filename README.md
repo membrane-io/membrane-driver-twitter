@@ -8,7 +8,7 @@ Get [Client key and secret](https://developer.twitter.com/en/portal) from twitte
 
 $~~~~$`mctl action "twitter:configure(CLIENT_ID:'<string>',CLIENT_SECRET:'<string>')"`
 
-Create a tweet (it also support polls!)
+Create a tweet
 
 $~~~~$`mctl action "twitter:tweet(text:'Hi!')"`
 
@@ -24,7 +24,7 @@ $~~~~$`mctl action "twitter:tweet(poll_duration_minutes:60,poll_options:"I’m f
     - Fields
         user(id | username) -> Ref <User>
         status() -> String
-        tweets(search) -> Ref <SearchCollection>
+        tweets(search) -> Ref <TweetCollection>
     - Actions
         configure(token) -> Void
         tweet() -> Void
@@ -37,10 +37,6 @@ $~~~~$`mctl action "twitter:tweet(poll_duration_minutes:60,poll_options:"I’m f
         followers -> <FollowersCollection>
         mentions -> <MentionsCollection>
         liked -> <LikedCollection>
-<SearchCollection>
-    - Fields
-       one(id) -> Ref <Tweet>
-       page(pagination_token, max_results) -> Ref <TweetPage>
 <TweetCollection>
     - Fields
        one(id) -> Ref <Tweet>
