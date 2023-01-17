@@ -2,8 +2,7 @@
 // `root` is a reference to this program's root node
 // `state` is an object that persist across program updates. Store data here.
 import { root, state, nodes } from "membrane";
-import { api, parseQS, getBearerToken } from "./util";
-import fetch from "node-fetch";
+import { api, parseQS, getBearerToken, shouldFetch } from "./util";
 
 export const Root = {
   parse({ args: { name, value } }) {
@@ -19,13 +18,17 @@ export const Root = {
   status() {
     if (!state.client_id || !state.client_secret) {
       return "Please get [OAuth 2.0 Client ID, Client Secret](https://developer.twitter.com/en/portal) and configure.";
-    } else if (!state.access_token) {
+    } else if (!state.auth) {
       return `Please [authenticate with Twitter](${state.endpointUrl})`;
     } else {
       return `Ready`;
     }
   },
-  user: async ({ args: { username } }) => {
+  user: async ({ args: { id, username }, info, context }) => {
+    // context.userId = id;
+    // if (!shouldFetch(info, ["id"])) {
+    //   return { id };
+    // }
     const res = await api("GET", `2/users/by/username/${username}`);
 
     return await res.json().then((json: any) => json && json.data);
@@ -47,7 +50,7 @@ export const Root = {
 
     const data = {
       text: args.text,
-      ...(poll) && { poll },
+      ...(poll && { poll }),
     };
     JSON.stringify(
       await api("POST", "2/tweets", {}, JSON.stringify({ ...data }))
@@ -65,14 +68,14 @@ export const TweetCollection = {
   async page({ self, args }) {
     let path = "2/tweets/search/recent";
     const { username } = self.$argsAt(root.user);
-    const { id } = await root.user({ username }).$query('{ id }');
-    if (id) {
+    if (username) {
+      const { id } = await root.user({ username }).$query("{ id }");
       path = `2/users/${id}/tweets`;
     }
     const res = await api("GET", path, args);
     const { data, meta } = await res.json();
 
-    const next = self.page({ pagination_token: "" });
+    const next = self.page({ pagination_token: meta.next_token });
     return { items: data, next };
   },
 };
@@ -80,7 +83,7 @@ export const TweetCollection = {
 export const FollowersCollection = {
   async page({ self, args }) {
     const { username } = self.$argsAt(root.user);
-    const { id } = await root.user({ username }).$query('{ id }');
+    const { id } = await root.user({ username }).$query("{ id }");
     const res = await api("GET", `2/users/${id}/followers`, args);
     const { data, meta } = await res.json();
 
@@ -92,7 +95,7 @@ export const FollowersCollection = {
 export const MentionsCollection = {
   async page({ self, args }) {
     const { username } = self.$argsAt(root.user);
-    const { id } = await root.user({ username }).$query('{ id }');
+    const { id } = await root.user({ username }).$query("{ id }");
     const res = await api("GET", `2/users/${id}/mentions`, args);
     const { data, meta } = await res.json();
 
@@ -104,7 +107,7 @@ export const MentionsCollection = {
 export const LikedCollection = {
   async page({ self, args }) {
     const { username } = self.$argsAt(root.user);
-    const { id } = await root.user({ username }).$query('{ id }');
+    const { id } = await root.user({ username }).$query("{ id }");
     const res = await api("GET", `2/users/${id}/liked_tweets`, args);
     const { data, meta } = await res.json();
 
@@ -153,7 +156,8 @@ export async function endpoint({ args: { path, query, headers, body } }) {
     case "/auth":
     case "/auth/": {
       state.code_challenge = "membrane"; // TODO: generateCodeChallenge();
-      const scope = "tweet.read tweet.write users.read follows.read follows.write like.read like.write";
+      const scope =
+        "tweet.read tweet.write users.read follows.read follows.write like.read like.write offline.access";
       return JSON.stringify({
         status: 303,
         headers: {
@@ -163,15 +167,18 @@ export async function endpoint({ args: { path, query, headers, body } }) {
             state.endpointUrl
           )}/callback&scope=${encodeURIComponent(
             scope
-          )}&state=state&code_challenge=${state.code_challenge}&code_challenge_method=plain`,
+          )}&state=state&code_challenge=${
+            state.code_challenge
+          }&code_challenge_method=plain`,
         },
       });
     }
     case "/callback": {
       const { code } = parseQS(query);
-      const { access_token } = await getBearerToken(code);
+      const { access_token, refresh_token } = await getBearerToken("access", code);
       if (access_token) {
-        state.access_token = access_token;
+        state.accessToken = access_token;
+        state.refreshToken = refresh_token;
         return "Twitter driver configured correctly";
       }
       return "Error";
