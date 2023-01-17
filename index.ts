@@ -37,6 +37,10 @@ export const Root = {
     state.client_id = CLIENT_ID;
     state.client_secret = CLIENT_SECRET;
   },
+  getUserByUsername: async ({ args: { username } }) => {
+    const res = await api("GET", `2/users/by/username/${username}`);
+    return root.user({ id: await res.json().then((json: any) => json && json.data.id) });
+  },
   tweet: async ({ args }) => {
     let poll;
     if (args.poll_options && args.poll_duration_minutes) {

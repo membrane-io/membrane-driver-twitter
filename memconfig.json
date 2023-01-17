@@ -95,6 +95,17 @@
             "name": "tweets",
             "type": "TweetCollection",
             "params": []
+          },
+          {
+            "name": "userUserByUsername",
+            "type": "Ref",
+            "ofType": "User",
+            "params": [
+              {
+                "name": "username",
+                "type": "String"
+              }
+            ]
           }
         ]
       },
