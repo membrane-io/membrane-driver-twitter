@@ -18,19 +18,18 @@ export const Root = {
   status() {
     if (!state.client_id || !state.client_secret) {
       return "Please get [OAuth 2.0 Client ID, Client Secret](https://developer.twitter.com/en/portal) and configure.";
-    } else if (!state.auth) {
+    } else if (!state.refresh_token) {
       return `Please [authenticate with Twitter](${state.endpointUrl})`;
     } else {
       return `Ready`;
     }
   },
-  user: async ({ args: { id, username }, info, context }) => {
-    // context.userId = id;
-    // if (!shouldFetch(info, ["id"])) {
-    //   return { id };
-    // }
-    const res = await api("GET", `2/users/by/username/${username}`);
-
+  user: async ({ args: { id }, info, context }) => {
+    context.userId = id;
+    if (!shouldFetch(info, ["id"])) {
+      return { id };
+    }
+    const res = await api("GET", `2/users/${id}`);
     return await res.json().then((json: any) => json && json.data);
   },
   configure: async ({ args: { CLIENT_ID, CLIENT_SECRET } }) => {
@@ -65,53 +64,49 @@ export const TweetCollection = {
 
     return await res.json().then((json: any) => json && json.data);
   },
-  async page({ self, args }) {
+  async page({ self, args, context }) {
     let path = "2/tweets/search/recent";
-    const { username } = self.$argsAt(root.user);
-    if (username) {
-      const { id } = await root.user({ username }).$query("{ id }");
+    const { userId: id } = context;
+    if (id) {
       path = `2/users/${id}/tweets`;
     }
     const res = await api("GET", path, args);
     const { data, meta } = await res.json();
 
-    const next = self.page({ pagination_token: meta.next_token });
+    const next = self.page({ ...args, pagination_token: meta.next_token });
     return { items: data, next };
   },
 };
 
 export const FollowersCollection = {
-  async page({ self, args }) {
-    const { username } = self.$argsAt(root.user);
-    const { id } = await root.user({ username }).$query("{ id }");
+  async page({ self, args, context }) {
+    const { userId: id } = context;
     const res = await api("GET", `2/users/${id}/followers`, args);
     const { data, meta } = await res.json();
 
-    const next = self.page({ pagination_token: meta.next_token });
+    const next = self.page({ ...args, pagination_token: meta.next_token });
     return { items: data, next };
   },
 };
 
 export const MentionsCollection = {
-  async page({ self, args }) {
-    const { username } = self.$argsAt(root.user);
-    const { id } = await root.user({ username }).$query("{ id }");
+  async page({ self, args, context }) {
+    const { userId: id } = context;
     const res = await api("GET", `2/users/${id}/mentions`, args);
     const { data, meta } = await res.json();
 
-    const next = self.page({ pagination_token: meta.next_token });
+    const next = self.page({ ...args, pagination_token: meta.next_token });
     return { items: data, next };
   },
 };
 
 export const LikedCollection = {
-  async page({ self, args }) {
-    const { username } = self.$argsAt(root.user);
-    const { id } = await root.user({ username }).$query("{ id }");
+  async page({ self, args, context }) {
+    const { userId: id } = context;
     const res = await api("GET", `2/users/${id}/liked_tweets`, args);
     const { data, meta } = await res.json();
 
-    const next = self.page({ pagination_token: meta.next_token });
+    const next = self.page({ ...args, pagination_token: meta.next_token });
     return { items: data, next };
   },
 };
@@ -122,16 +117,16 @@ export const LikingCollection = {
     const res = await api("GET", `2/tweets/${id}/liking_users`, args);
     const { data, meta } = await res.json();
 
-    const next = self.page({ pagination_token: meta.next_token });
+    const next = self.page({ ...args, pagination_token: meta.next_token });
     return { items: data, next };
   },
 };
 
 export const Tweet = {
   gref: ({ obj, self }) => {
-    const { username } = self.$argsAt(root.user);
-    if (username) {
-      return root.user({ username }).tweets.one({ id: obj.id });
+    const { id } = self.$argsAt(root.user);
+    if (id) {
+      return root.user({ id }).tweets.one({ id: obj.id });
     }
     return root.tweets.one({ id: obj.id });
   },
@@ -140,7 +135,7 @@ export const Tweet = {
 
 export const User = {
   gref: ({ obj }) => {
-    return root.user({ username: obj.username });
+    return root.user({ id: obj.id });
   },
   tweets: () => ({}),
   followers: () => ({}),
@@ -175,7 +170,10 @@ export async function endpoint({ args: { path, query, headers, body } }) {
     }
     case "/callback": {
       const { code } = parseQS(query);
-      const { access_token, refresh_token } = await getBearerToken("access", code);
+      const { access_token, refresh_token } = await getBearerToken(
+        "access",
+        code
+      );
       if (access_token) {
         state.accessToken = access_token;
         state.refreshToken = refresh_token;

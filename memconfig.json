@@ -82,7 +82,7 @@
             "type": "User",
             "params": [
               {
-                "name": "username",
+                "name": "id",
                 "type": "String"
               }
             ]
@@ -139,7 +139,8 @@
           },
           {
             "name": "next",
-            "type": "TweetPage"
+            "type": "Ref",
+            "ofType": "TweetPage"
           }
         ]
       },
@@ -176,7 +177,8 @@
           },
           {
             "name": "next",
-            "type": "FollowersPage"
+            "type": "Ref",
+            "ofType": "FollowersPage"
           }
         ]
       },
@@ -213,7 +215,8 @@
           },
           {
             "name": "next",
-            "type": "MentionsPage"
+            "type": "Ref",
+            "ofType": "MentionsPage"
           }
         ]
       },
@@ -246,7 +249,8 @@
           },
           {
             "name": "next",
-            "type": "LikedPage"
+            "type": "Ref",
+            "ofType": "LikedPage"
           }
         ]
       },
@@ -279,7 +283,8 @@
           },
           {
             "name": "next",
-            "type": "LikingPage"
+            "type": "Ref",
+            "ofType": "LikingPage"
           }
         ]
       },
