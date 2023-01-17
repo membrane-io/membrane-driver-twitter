@@ -18,7 +18,7 @@ export const Root = {
   status() {
     if (!state.client_id || !state.client_secret) {
       return "Please get [OAuth 2.0 Client ID, Client Secret](https://developer.twitter.com/en/portal) and configure.";
-    } else if (!state.refresh_token) {
+    } else if (!state.refreshToken) {
       return `Please [authenticate with Twitter](${state.endpointUrl})`;
     } else {
       return `Ready`;
