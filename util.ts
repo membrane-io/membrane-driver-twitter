@@ -83,7 +83,6 @@ export async function getBearerToken(type: string, code?: string) {
     },
   };
   const res = await fetch(`${api_url}/2/oauth2/token`, req);
-  console.log(JSON.stringify(await res.json()));
   
   const { expires_in, refresh_token, access_token } = await res.json();
   state.expiresIn = expiredIn(Number(expires_in));
