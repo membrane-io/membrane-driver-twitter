@@ -84,6 +84,10 @@
               {
                 "name": "id",
                 "type": "String"
+              },
+              {
+                "name": "username",
+                "type": "String"
               }
             ]
           },
@@ -95,17 +99,6 @@
             "name": "tweets",
             "type": "TweetCollection",
             "params": []
-          },
-          {
-            "name": "userUserByUsername",
-            "type": "Ref",
-            "ofType": "User",
-            "params": [
-              {
-                "name": "username",
-                "type": "String"
-              }
-            ]
           }
         ]
       },

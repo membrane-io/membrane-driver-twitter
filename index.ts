@@ -4,6 +4,8 @@
 import { root, state, nodes } from "membrane";
 import { api, parseQS, getBearerToken, shouldFetch } from "./util";
 
+state.idsByUsernames = state.idsByUsernames ?? {};
+
 export const Root = {
   parse({ args: { name, value } }) {
     switch (name) {
@@ -24,22 +26,32 @@ export const Root = {
       return `Ready`;
     }
   },
-  user: async ({ args: { id }, info, context }) => {
+  user: async ({ args: { username, id }, info, context }) => {
+    if (username) {
+      if (state.idsByUsernames[username]) {
+        id = state.idsByUsernames[username];
+      } else {
+        const res = await api("GET", `2/users/by/username/${username}`);
+        const { data } = await res.json();
+        id = data.id;
+        state.idsByUsernames[username] = id;
+      }
+    }
     context.userId = id;
-    if (!shouldFetch(info, ["id"])) {
+    if (
+      !shouldFetch(info, ["id", "tweets", "followers", "mentions", "likes"])
+    ) {
       return { id };
     }
-    const res = await api("GET", `2/users/${id}`);
-    return await res.json().then((json: any) => json && json.data);
+    
+    const res = await api("GET", `2/users/by/username/${username}`);
+    const { data } = await res.json();
+    return data;
   },
   configure: async ({ args: { CLIENT_ID, CLIENT_SECRET } }) => {
     state.endpointUrl = state.endpointUrl ?? (await nodes.endpoint.$get());
     state.client_id = CLIENT_ID;
     state.client_secret = CLIENT_SECRET;
-  },
-  getUserByUsername: async ({ args: { username } }) => {
-    const res = await api("GET", `2/users/by/username/${username}`);
-    return root.user({ id: await res.json().then((json: any) => json && json.data.id) });
   },
   tweet: async ({ args }) => {
     let poll;
@@ -128,9 +140,9 @@ export const LikingCollection = {
 
 export const Tweet = {
   gref: ({ obj, self }) => {
-    const { id } = self.$argsAt(root.user);
-    if (id) {
-      return root.user({ id }).tweets.one({ id: obj.id });
+    const { username } = self.$argsAt(root.user);
+    if (username) {
+      return root.user({ username }).tweets.one({ id: obj.id });
     }
     return root.tweets.one({ id: obj.id });
   },
@@ -139,7 +151,7 @@ export const Tweet = {
 
 export const User = {
   gref: ({ obj }) => {
-    return root.user({ id: obj.id });
+    return root.user({ username: obj.username });
   },
   tweets: () => ({}),
   followers: () => ({}),
