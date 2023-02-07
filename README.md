@@ -4,7 +4,7 @@ A [Membrane.io](https://membrane.io/) driver for Twitter.
 
 ## Setup
 
-Get [Client key and secret](https://developer.twitter.com/en/portal) from twitter dev portal and setup your [Callback URI](https://developer.twitter.com/en/docs/apps/callback-urls) with the program Endpoint URL.
+Get Oauth2 [Client key and secret](https://developer.twitter.com/en/portal) from twitter dev portal and setup your [Callback URI](https://developer.twitter.com/en/docs/apps/callback-urls) with the program Endpoint URL.
 
 $~~~~$`mctl action "twitter:configure(CLIENT_ID:'<string>',CLIENT_SECRET:'<string>')"`
 

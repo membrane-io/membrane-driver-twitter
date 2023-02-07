@@ -12,8 +12,13 @@ export const Root = {
       case "tweet": {
         // TODO: parse tweet url
         const url = new URL(value);
-        const [, user, tweet] = url.pathname.split("/");
+        const [, user, , tweet] = url.pathname.split("/");
         return [root.tweets.one({ id: tweet })];
+      }
+      case "user": {
+        const [user] = value.match(/\w{1,15}/g);
+        
+        return [root.user({ username: user })];
       }
     }
   },

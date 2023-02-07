@@ -3,8 +3,14 @@
     "tweet": {
       "description": "Tweet",
       "type": "url",
-      "regex": "https://twitter.com/[^/]+/status/[0-9]+",
+      "regex": "https://twitter.com/[^/]+/status/[0-9]+$",
       "searchIn": "https://twitter.com"
+    },
+    "user": {
+      "description": "User",
+      "type": "text",
+      "regex": "@\\w{1,15}",
+      "searchIn": "https://twitter.com/"
     }
   },
   "schema": {
@@ -99,6 +105,27 @@
             "name": "tweets",
             "type": "TweetCollection",
             "params": []
+          },
+          {
+            "name": "parse",
+            "type": "List",
+            "hints": {
+              "hidden": true
+            },
+            "ofType": {
+              "type": "Ref",
+              "ofType": "Tweet"
+            },
+            "params": [
+              {
+                "name": "name",
+                "type": "String"
+              },
+              {
+                "name": "value",
+                "type": "String"
+              }
+            ]
           }
         ]
       },
