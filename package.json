@@ -1,0 +1,9 @@
+{
+  "name": "twitter",
+  "version": "0.0.1",
+  "description": "Twitter driver for Membrane",
+  "author": "Juan Campa <aranajhonny@icloud.com>",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {}
+}
