@@ -150,12 +150,14 @@
             "params": [
               {
                 "name": "query",
-                "type": "String"
+                "type": "String",
+                "optional": true
               },
               {
                 "name": "pagination_token",
                 "type": "String",
-                "description": "Returns results with a Tweet ID less than (that is, older than) the specified ID. The ID specified is exclusive and responses will not include it."
+                "description": "Returns results with a Tweet ID less than (that is, older than) the specified ID. The ID specified is exclusive and responses will not include it.",
+                "optional": true
               }
             ]
           }
@@ -185,15 +187,18 @@
             "params": [
               {
                 "name": "pagination_token",
-                "type": "String"
+                "type": "String",
+                "optional": true
               },
               {
                 "name": "max_results",
-                "type": "String"
+                "type": "String",
+                "optional": true
               },
               {
                 "name": "since_id",
-                "type": "String"
+                "type": "String",
+                "optional": true
               }
             ]
           }
@@ -223,15 +228,18 @@
             "params": [
               {
                 "name": "pagination_token",
-                "type": "String"
+                "type": "String",
+                "optional": true
               },
               {
                 "name": "max_results",
-                "type": "String"
+                "type": "String",
+                "optional": true
               },
               {
                 "name": "since_id",
-                "type": "String"
+                "type": "String",
+                "optional": true
               }
             ]
           }
@@ -261,11 +269,13 @@
             "params": [
               {
                 "name": "pagination_token",
-                "type": "String"
+                "type": "String",
+                "optional": true
               },
               {
                 "name": "max_results",
-                "type": "String"
+                "type": "String",
+                "optional": true
               }
             ]
           }
@@ -295,11 +305,13 @@
             "params": [
               {
                 "name": "pagination_token",
-                "type": "String"
+                "type": "String",
+                "optional": true
               },
               {
                 "name": "max_results",
-                "type": "String"
+                "type": "String",
+                "optional": true
               }
             ]
           }
