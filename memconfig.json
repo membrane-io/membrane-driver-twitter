@@ -30,12 +30,14 @@
               {
                 "name": "poll_options",
                 "type": "String",
-                "description": "A list of poll options for a Tweet with a poll, must be comma separated."
+                "description": "A list of poll options for a Tweet with a poll, must be comma separated.",
+                "optional": true
               },
               {
                 "name": "poll_duration_minutes",
                 "type": "Int",
-                "description": "Duration of the poll in minutes for a Tweet with a poll."
+                "description": "Duration of the poll in minutes for a Tweet with a poll.",
+                "optional": true
               }
             ]
           },
@@ -52,7 +54,8 @@
               },
               {
                 "name": "body",
-                "type": "String"
+                "type": "String",
+                "optional": true
               },
               {
                 "name": "path",
@@ -60,7 +63,8 @@
               },
               {
                 "name": "query",
-                "type": "String"
+                "type": "String",
+                "optional": true
               },
               {
                 "name": "headers",
@@ -150,12 +154,14 @@
             "params": [
               {
                 "name": "query",
-                "type": "String"
+                "type": "String",
+                "optional": true
               },
               {
                 "name": "pagination_token",
                 "type": "String",
-                "description": "Returns results with a Tweet ID less than (that is, older than) the specified ID. The ID specified is exclusive and responses will not include it."
+                "description": "Returns results with a Tweet ID less than (that is, older than) the specified ID. The ID specified is exclusive and responses will not include it.",
+                "optional": true
               }
             ]
           }
@@ -185,15 +191,18 @@
             "params": [
               {
                 "name": "pagination_token",
-                "type": "String"
+                "type": "String",
+                "optional": true
               },
               {
                 "name": "max_results",
-                "type": "String"
+                "type": "String",
+                "optional": true
               },
               {
                 "name": "since_id",
-                "type": "String"
+                "type": "String",
+                "optional": true
               }
             ]
           }
@@ -223,15 +232,18 @@
             "params": [
               {
                 "name": "pagination_token",
-                "type": "String"
+                "type": "String",
+                "optional": true
               },
               {
                 "name": "max_results",
-                "type": "String"
+                "type": "String",
+                "optional": true
               },
               {
                 "name": "since_id",
-                "type": "String"
+                "type": "String",
+                "optional": true
               }
             ]
           }
@@ -261,11 +273,13 @@
             "params": [
               {
                 "name": "pagination_token",
-                "type": "String"
+                "type": "String",
+                "optional": true
               },
               {
                 "name": "max_results",
-                "type": "String"
+                "type": "String",
+                "optional": true
               }
             ]
           }
@@ -295,11 +309,13 @@
             "params": [
               {
                 "name": "pagination_token",
-                "type": "String"
+                "type": "String",
+                "optional": true
               },
               {
                 "name": "max_results",
-                "type": "String"
+                "type": "String",
+                "optional": true
               }
             ]
           }
