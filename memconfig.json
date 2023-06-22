@@ -30,12 +30,14 @@
               {
                 "name": "poll_options",
                 "type": "String",
-                "description": "A list of poll options for a Tweet with a poll, must be comma separated."
+                "description": "A list of poll options for a Tweet with a poll, must be comma separated.",
+                "optional": true
               },
               {
                 "name": "poll_duration_minutes",
                 "type": "Int",
-                "description": "Duration of the poll in minutes for a Tweet with a poll."
+                "description": "Duration of the poll in minutes for a Tweet with a poll.",
+                "optional": true
               }
             ]
           },
@@ -52,7 +54,8 @@
               },
               {
                 "name": "body",
-                "type": "String"
+                "type": "String",
+                "optional": true
               },
               {
                 "name": "path",
@@ -60,7 +63,8 @@
               },
               {
                 "name": "query",
-                "type": "String"
+                "type": "String",
+                "optional": true
               },
               {
                 "name": "headers",
