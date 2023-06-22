@@ -17,7 +17,7 @@
     "types": [
       {
         "name": "Root",
-        "description": "Driver for Manage your tweets",
+        "description": "Driver for the Twitter API",
         "actions": [
           {
             "name": "tweet",
