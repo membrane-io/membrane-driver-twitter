@@ -7,7 +7,7 @@ import { api, parseQS, getBearerToken, shouldFetch } from "./util";
 state.idsByUsernames = state.idsByUsernames ?? {};
 
 export const Root = {
-  parse({ args: { name, value } }) {
+  parse({ name, value }) {
     switch (name) {
       case "tweet": {
         // TODO: parse tweet url
@@ -17,21 +17,21 @@ export const Root = {
       }
       case "user": {
         const [user] = value.match(/\w{1,15}/g);
-        
+
         return [root.user({ username: user })];
       }
     }
   },
   status() {
-    if (!state.client_id || !state.client_secret) {
-      return "Please get [OAuth 2.0 Client ID, Client Secret](https://developer.twitter.com/en/portal) and configure.";
+    if (!state.clientId || !state.clientSecret) {
+      return "Please get [OAuth 2.0 Client ID and Secret](https://developer.twitter.com/en/portal) and [configure](:configure).";
     } else if (!state.refreshToken) {
-      return `Please [authenticate with Twitter](${state.endpointUrl})`;
+      return `Please [configure your callback URL](https://developer.twitter.com/en/docs/apps/callback-urls) and [authenticate](${state.endpointUrl})`;
     } else {
       return `Ready`;
     }
   },
-  user: async ({ args: { username, id }, info, context }) => {
+  user: async ({ username, id }, { info, context }) => {
     if (username) {
       if (state.idsByUsernames[username]) {
         id = state.idsByUsernames[username];
@@ -48,17 +48,18 @@ export const Root = {
     ) {
       return { id };
     }
-    
+
     const res = await api("GET", `2/users/by/username/${username}`);
     const { data } = await res.json();
     return data;
   },
-  configure: async ({ args: { CLIENT_ID, CLIENT_SECRET } }) => {
+  configure: async ({ clientId, clientSecret }) => {
     state.endpointUrl = state.endpointUrl ?? (await nodes.endpoint.$get());
-    state.client_id = CLIENT_ID;
-    state.client_secret = CLIENT_SECRET;
+    state.clientId = clientId;
+    state.clientSecret = clientSecret;
+    root.statusChanged.$emit();
   },
-  tweet: async ({ args }) => {
+  tweet: async (args) => {
     let poll;
     if (args.poll_options && args.poll_duration_minutes) {
       poll = {
@@ -80,12 +81,12 @@ export const Root = {
 };
 
 export const TweetCollection = {
-  async one({ args: { id } }) {
+  async one({ id }) {
     const res = await api("GET", `2/tweets/${id}`);
 
     return await res.json().then((json: any) => json && json.data);
   },
-  async page({ self, args, context }) {
+  async page(args, { self, context }) {
     let path = "2/tweets/search/recent";
     const { userId: id } = context;
     if (id) {
@@ -94,35 +95,41 @@ export const TweetCollection = {
     const res = await api("GET", path, args);
     const { data, meta } = await res.json();
 
-    const next = self.page({ ...args, pagination_token: meta.next_token });
+    const next =
+      meta?.next_token &&
+      self.page({ ...args, pagination_token: meta.next_token });
     return { items: data, next };
   },
 };
 
 export const FollowersCollection = {
-  async page({ self, args, context }) {
+  async page(args, { self, context }) {
     const { userId: id } = context;
     const res = await api("GET", `2/users/${id}/followers`, args);
     const { data, meta } = await res.json();
 
-    const next = self.page({ ...args, pagination_token: meta.next_token });
+    const next =
+      meta?.next_token &&
+      self.page({ ...args, pagination_token: meta.next_token });
     return { items: data, next };
   },
 };
 
 export const MentionsCollection = {
-  async page({ self, args, context }) {
+  async page(args, { self, context }) {
     const { userId: id } = context;
     const res = await api("GET", `2/users/${id}/mentions`, args);
     const { data, meta } = await res.json();
 
-    const next = self.page({ ...args, pagination_token: meta.next_token });
+    const next =
+      meta?.next_token &&
+      self.page({ ...args, pagination_token: meta.next_token });
     return { items: data, next };
   },
 };
 
 export const LikedCollection = {
-  async page({ self, args, context }) {
+  async page(args, { self, context }) {
     const { userId: id } = context;
     const res = await api("GET", `2/users/${id}/liked_tweets`, args);
     const { data, meta } = await res.json();
@@ -133,18 +140,20 @@ export const LikedCollection = {
 };
 
 export const LikingCollection = {
-  async page({ self, args }) {
+  async page(args, { self }) {
     const { id } = self.$argsAt(root.user.tweets.one);
     const res = await api("GET", `2/tweets/${id}/liking_users`, args);
     const { data, meta } = await res.json();
 
-    const next = self.page({ ...args, pagination_token: meta.next_token });
+    const next =
+      meta?.next_token &&
+      self.page({ ...args, pagination_token: meta.next_token });
     return { items: data, next };
   },
 };
 
 export const Tweet = {
-  gref: ({ obj, self }) => {
+  gref: (_, { obj, self }) => {
     const { username } = self.$argsAt(root.user);
     if (username) {
       return root.user({ username }).tweets.one({ id: obj.id });
@@ -155,7 +164,7 @@ export const Tweet = {
 };
 
 export const User = {
-  gref: ({ obj }) => {
+  gref: (_, { obj }) => {
     return root.user({ username: obj.username });
   },
   tweets: () => ({}),
@@ -164,27 +173,27 @@ export const User = {
   liked: () => ({}),
 };
 
-export async function endpoint({ args: { path, query, headers, body } }) {
+export async function endpoint({ path, query, headers, body }) {
   switch (path) {
     case "/": {
       return `<a href="/auth">Authenticate with Twitter</a>`;
     }
     case "/auth":
     case "/auth/": {
-      state.code_challenge = "membrane"; // TODO: generateCodeChallenge();
+      state.codeChallenge = "membrane"; // TODO: generateCodeChallenge();
       const scope =
         "tweet.read tweet.write users.read follows.read follows.write like.read like.write offline.access";
       return JSON.stringify({
         status: 303,
         headers: {
           location: `https://twitter.com/i/oauth2/authorize?response_type=code&client_id=${
-            state.client_id
+            state.clientId
           }&redirect_uri=${encodeURIComponent(
             state.endpointUrl
           )}/callback&scope=${encodeURIComponent(
             scope
           )}&state=state&code_challenge=${
-            state.code_challenge
+            state.codeChallenge
           }&code_challenge_method=plain`,
         },
       });
@@ -195,6 +204,7 @@ export async function endpoint({ args: { path, query, headers, body } }) {
         "access",
         code
       );
+      root.statusChanged.$emit();
       if (access_token) {
         state.accessToken = access_token;
         state.refreshToken = refresh_token;

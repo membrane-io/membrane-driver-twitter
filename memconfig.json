@@ -77,11 +77,11 @@
             "type": "Void",
             "params": [
               {
-                "name": "CLIENT_ID",
+                "name": "clientSecret",
                 "type": "String"
               },
               {
-                "name": "CLIENT_SECRET",
+                "name": "clientId",
                 "type": "String"
               }
             ]
@@ -94,11 +94,13 @@
             "params": [
               {
                 "name": "id",
-                "type": "String"
+                "type": "String",
+                "optional": true
               },
               {
                 "name": "username",
-                "type": "String"
+                "type": "String",
+                "optional": true
               }
             ]
           },
@@ -131,6 +133,12 @@
                 "type": "String"
               }
             ]
+          }
+        ],
+        "events": [
+          {
+            "name": "statusChanged",
+            "type": "Void"
           }
         ]
       },

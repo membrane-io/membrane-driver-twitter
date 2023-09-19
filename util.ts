@@ -1,15 +1,14 @@
 import { state } from "membrane";
-import fetch from "node-fetch";
 
 const api_url = "https://api.twitter.com";
 
 export async function api(
-  method: string,
+  method: RequestMethod,
   path: string,
   query?: any,
   body?: string
 ): Promise<any> {
-  if (!state.client_id || !state.client_secret) {
+  if (!state.clientId || !state.clientSecret) {
     throw new Error(
       "You must first invoke the configure action with an API key and secret."
     );
@@ -61,7 +60,7 @@ export async function getBearerToken(type: string, code?: string) {
   const url = new URL(`${api_url}/2/oauth2/token`);
   const params = new URLSearchParams(url.search);
 
-  params.append("client_id", state.client_id);
+  params.append("client_id", state.clientId);
   if (type === "refresh") {
     params.append("refresh_token", state.refreshToken);
     params.append("grant_type", "refresh_token");
@@ -69,21 +68,21 @@ export async function getBearerToken(type: string, code?: string) {
     params.append("code", code!);
     params.append("grant_type", "authorization_code");
     params.append("redirect_uri", `${state.endpointUrl}/callback`);
-    params.append("code_verifier", state.code_challenge);
+    params.append("code_verifier", state.codeChallenge);
   }
-  
+
   const req = {
-    method: "POST",
+    method: "POST" as RequestMethod,
     body: params.toString(),
     headers: {
       Authorization: `Basic ${Buffer.from(
-        `${state.client_id}:${state.client_secret}`
+        `${state.clientId}:${state.clientSecret}`
       ).toString("base64")}`,
       "Content-Type": "application/x-www-form-urlencoded",
     },
   };
   const res = await fetch(`${api_url}/2/oauth2/token`, req);
-  
+
   const { expires_in, refresh_token, access_token } = await res.json();
   expiredIn(Number(expires_in));
 
