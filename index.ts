@@ -73,12 +73,20 @@ export const Root = {
       text: args.text,
       ...(poll && { poll }),
     };
-    JSON.stringify(
-      await api("POST", "2/tweets", {}, JSON.stringify({ ...data }))
-    );
+    return await api("POST", "2/tweets", {}, JSON.stringify({ ...data }));
   },
   tweets: () => ({}),
+  tests: () => ({}),
 };
+
+export const Tests = {
+  async testTweet() {
+    const res = await root.tweet({
+      text: `${new Date().toISOString()}`,
+    });
+    return res.status === 201;
+  },
+}
 
 export const TweetCollection = {
   async one({ id }) {

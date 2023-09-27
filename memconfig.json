@@ -21,7 +21,7 @@
         "actions": [
           {
             "name": "tweet",
-            "type": "Void",
+            "type": "Json",
             "params": [
               {
                 "name": "text",
@@ -133,6 +133,10 @@
                 "type": "String"
               }
             ]
+          },
+          {
+            "name": "tests",
+            "type": "Tests"
           }
         ],
         "events": [
@@ -402,6 +406,15 @@
       },
       {
         "name": "MaxRedirectsError"
+      },
+      {
+        "name": "Tests",
+        "actions": [
+          {
+            "name": "testTweet",
+            "type": "Boolean"
+          }
+        ]
       }
     ]
   },
