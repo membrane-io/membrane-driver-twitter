@@ -403,7 +403,7 @@
             "type": "LikingCollection"
           }
         ],
-        "description": "test"
+        "description": ""
       },
       {
         "name": "MaxRedirectsError"
