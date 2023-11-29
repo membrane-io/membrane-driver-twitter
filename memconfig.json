@@ -193,7 +193,8 @@
             "type": "Ref",
             "ofType": "TweetPage"
           }
-        ]
+        ],
+        "description": "Page of tweets, part of pagination in tweet collections."
       },
       {
         "name": "FollowersCollection",
