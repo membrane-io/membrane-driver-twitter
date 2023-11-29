@@ -237,7 +237,7 @@
             "ofType": "FollowersPage"
           }
         ],
-        "description": "Page of followers, part of pagination in followers collections."
+        "description": "Represents a paginated list of a user's followers."
       },
       {
         "name": "MentionsCollection",
