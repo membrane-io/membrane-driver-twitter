@@ -220,7 +220,8 @@
               }
             ]
           }
-        ]
+        ],
+        "description": "Collection of a user's followers, supporting pagination."
       },
       {
         "name": "FollowersPage",
