@@ -17,7 +17,7 @@
     "types": [
       {
         "name": "Root",
-        "description": "Facilitates Twitter API interactions, including tweeting, user management, and configuration settings.",
+        "description": "Enables interaction with Twitter through API calls, supporting tweeting, polling, user management, and configuration. Provides tweet collection management and user-related operations.",
         "actions": [
           {
             "name": "tweet",
