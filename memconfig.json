@@ -393,7 +393,7 @@
             "type": "LikedCollection"
           }
         ],
-        "description": "Represents a Twitter user with operations related to tweets and followers."
+        "description": "Defines a Twitter user and provides access to their tweets, followers, mentions, and liked tweets."
       },
       {
         "name": "Tweet",
