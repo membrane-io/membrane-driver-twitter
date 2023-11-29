@@ -280,7 +280,7 @@
             "ofType": "MentionsPage"
           }
         ],
-        "description": "Page of mentions, part of pagination in mentions collections."
+        "description": "Represents a paginated list of tweets mentioning a user."
       },
       {
         "name": "LikedCollection",
