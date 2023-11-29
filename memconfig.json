@@ -263,7 +263,8 @@
               }
             ]
           }
-        ]
+        ],
+        "description": "Manages the collection and pagination of tweets mentioning a user."
       },
       {
         "name": "MentionsPage",
