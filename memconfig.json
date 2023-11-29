@@ -17,7 +17,7 @@
     "types": [
       {
         "name": "Root",
-        "description": "Root type for the Twitter driver, handling tweets, user management, and configuration.",
+        "description": "Handles Twitter API interactions, including tweeting, user management, and driver configuration.",
         "actions": [
           {
             "name": "tweet",
