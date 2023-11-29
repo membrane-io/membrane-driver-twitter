@@ -428,7 +428,7 @@
             "type": "Boolean"
           }
         ],
-        "description": "Collection of tests for the Twitter driver."
+        "description": "Provides a suite of tests for verifying the functionality of the Twitter driver."
       }
     ]
   },
