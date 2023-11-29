@@ -316,7 +316,8 @@
             "type": "Ref",
             "ofType": "LikedPage"
           }
-        ]
+        ],
+        "description": "Page of liked tweets, part of pagination in liked collections."
       },
       {
         "name": "LikingCollection",
