@@ -177,7 +177,8 @@
               }
             ]
           }
-        ]
+        ],
+        "description": "Collection of tweets, supporting retrieval and pagination."
       },
       {
         "name": "TweetPage",
