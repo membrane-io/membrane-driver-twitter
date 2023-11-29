@@ -17,7 +17,7 @@
     "types": [
       {
         "name": "Root",
-        "description": "Enables interaction with Twitter, including tweeting, polling, user management, and configuration. Features include posting tweets with optional polls, retrieving user information, and setting up client credentials.",
+        "description": "Root type for the Twitter driver, handling tweets, user management, and configuration.",
         "actions": [
           {
             "name": "tweet",
