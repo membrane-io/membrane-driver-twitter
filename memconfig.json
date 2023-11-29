@@ -416,7 +416,8 @@
         "description": "Represents a single tweet with operations related to liking users."
       },
       {
-        "name": "MaxRedirectsError"
+        "name": "MaxRedirectsError",
+        "description": "Error type indicating maximum redirects reached."
       },
       {
         "name": "Tests",
