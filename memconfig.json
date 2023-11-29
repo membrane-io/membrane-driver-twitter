@@ -221,7 +221,7 @@
             ]
           }
         ],
-        "description": "Collection of a user's followers, supporting pagination."
+        "description": "Handles the collection and pagination of a user's followers."
       },
       {
         "name": "FollowersPage",
