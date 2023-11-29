@@ -338,7 +338,8 @@
               }
             ]
           }
-        ]
+        ],
+        "description": "Collection of users who liked a tweet, supporting pagination."
       },
       {
         "name": "LikingPage",
