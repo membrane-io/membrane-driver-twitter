@@ -263,7 +263,8 @@
               }
             ]
           }
-        ]
+        ],
+        "description": "Collection of mentions of a user, supporting pagination."
       },
       {
         "name": "MentionsPage",
