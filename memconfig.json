@@ -391,7 +391,8 @@
             "name": "liked",
             "type": "LikedCollection"
           }
-        ]
+        ],
+        "description": "Represents a Twitter user with operations related to tweets and followers."
       },
       {
         "name": "Tweet",
