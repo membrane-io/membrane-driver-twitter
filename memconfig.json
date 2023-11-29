@@ -300,7 +300,8 @@
               }
             ]
           }
-        ]
+        ],
+        "description": "Collection of tweets liked by a user, supporting pagination."
       },
       {
         "name": "LikedPage",
