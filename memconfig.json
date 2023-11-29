@@ -417,7 +417,8 @@
         "description": "Represents an individual tweet and provides access to the users who have liked it."
       },
       {
-        "name": "MaxRedirectsError"
+        "name": "MaxRedirectsError",
+        "description": "Error type indicating that the maximum number of redirects has been reached."
       },
       {
         "name": "Tests",
