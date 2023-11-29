@@ -263,8 +263,7 @@
               }
             ]
           }
-        ],
-        "description": "Collection of mentions of a user, supporting pagination."
+        ]
       },
       {
         "name": "MentionsPage",
@@ -279,7 +278,8 @@
             "type": "Ref",
             "ofType": "MentionsPage"
           }
-        ]
+        ],
+        "description": "Page of mentions, part of pagination in mentions collections."
       },
       {
         "name": "LikedCollection",
