@@ -17,7 +17,7 @@
     "types": [
       {
         "name": "Root",
-        "description": "Provides Twitter API integration for tweeting, polling, user management, and more. Supports tweet creation with optional polls, user data retrieval, and configuration settings.",
+        "description": "Enables interaction with Twitter, including tweeting, polling, user management, and configuration. Features include posting tweets with optional polls, retrieving user information, and setting up client credentials.",
         "actions": [
           {
             "name": "tweet",
