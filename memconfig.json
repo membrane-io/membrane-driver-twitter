@@ -414,7 +414,7 @@
             "type": "LikingCollection"
           }
         ],
-        "description": "Represents a single tweet with operations related to liking users."
+        "description": "Represents an individual tweet and provides access to the users who have liked it."
       },
       {
         "name": "MaxRedirectsError"
