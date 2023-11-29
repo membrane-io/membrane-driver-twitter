@@ -354,7 +354,8 @@
             "type": "Ref",
             "ofType": "LikingPage"
           }
-        ]
+        ],
+        "description": "Page of users, part of pagination in liking collections."
       },
       {
         "name": "User",
