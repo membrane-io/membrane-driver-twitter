@@ -318,7 +318,7 @@
             "ofType": "LikedPage"
           }
         ],
-        "description": "Page of liked tweets, part of pagination in liked collections."
+        "description": "Represents a paginated list of tweets liked by a user."
       },
       {
         "name": "LikingCollection",
