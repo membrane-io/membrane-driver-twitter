@@ -236,7 +236,8 @@
             "type": "Ref",
             "ofType": "FollowersPage"
           }
-        ]
+        ],
+        "description": "Page of followers, part of pagination in followers collections."
       },
       {
         "name": "MentionsCollection",
