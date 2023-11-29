@@ -356,7 +356,7 @@
             "ofType": "LikingPage"
           }
         ],
-        "description": "Page of users, part of pagination in liking collections."
+        "description": "Represents a paginated list of users who liked a specific tweet."
       },
       {
         "name": "User",
