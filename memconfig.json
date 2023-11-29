@@ -416,8 +416,7 @@
         "description": "Represents a single tweet with operations related to liking users."
       },
       {
-        "name": "MaxRedirectsError",
-        "description": "Error type indicating maximum redirects reached."
+        "name": "MaxRedirectsError"
       },
       {
         "name": "Tests",
@@ -426,7 +425,8 @@
             "name": "testTweet",
             "type": "Boolean"
           }
-        ]
+        ],
+        "description": "Collection of tests for the Twitter driver."
       }
     ]
   },
