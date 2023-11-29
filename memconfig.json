@@ -194,7 +194,7 @@
             "ofType": "TweetPage"
           }
         ],
-        "description": "Page of tweets, part of pagination in tweet collections."
+        "description": "Represents a paginated list of tweets."
       },
       {
         "name": "FollowersCollection",
