@@ -413,7 +413,7 @@
             "type": "LikingCollection"
           }
         ],
-        "description": ""
+        "description": "Represents a single tweet with operations related to liking users."
       },
       {
         "name": "MaxRedirectsError"
