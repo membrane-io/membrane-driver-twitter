@@ -102,16 +102,19 @@
                 "type": "String",
                 "optional": true
               }
-            ]
+            ],
+            "description": "Posts a new tweet with the specified text and optional poll."
           },
           {
             "name": "status",
-            "type": "String"
+            "type": "String",
+            "description": "Internal action to interact with the Twitter API endpoint."
           },
           {
             "name": "tweets",
             "type": "TweetCollection",
-            "params": []
+            "params": [],
+            "description": "Configures the Twitter driver with client credentials."
           },
           {
             "name": "parse",
