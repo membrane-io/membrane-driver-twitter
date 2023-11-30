@@ -17,7 +17,7 @@
     "types": [
       {
         "name": "Root",
-        "description": "Twitter driver for Membrane",
+        "description": "The root type for the Twitter driver, providing core functionalities.",
         "actions": [
           {
             "name": "tweet",
@@ -178,7 +178,7 @@
             ]
           }
         ],
-        "description": "Manages a collection of tweets, allowing retrieval and pagination."
+        "description": "Manages collections of tweets, enabling retrieval and pagination."
       },
       {
         "name": "TweetPage",
@@ -194,7 +194,7 @@
             "ofType": "TweetPage"
           }
         ],
-        "description": "Represents a paginated list of tweets."
+        "description": "Represents a page within a paginated collection of tweets."
       },
       {
         "name": "FollowersCollection",
@@ -221,7 +221,7 @@
             ]
           }
         ],
-        "description": "Handles the collection and pagination of a user's followers."
+        "description": "Handles collections and pagination of a user's followers."
       },
       {
         "name": "FollowersPage",
@@ -237,7 +237,7 @@
             "ofType": "FollowersPage"
           }
         ],
-        "description": "Represents a paginated list of a user's followers."
+        "description": "Represents a page within a paginated collection of a user's followers."
       },
       {
         "name": "MentionsCollection",
@@ -264,7 +264,7 @@
             ]
           }
         ],
-        "description": "Manages the collection and pagination of tweets mentioning a user."
+        "description": "Manages collections and pagination of tweets mentioning a user."
       },
       {
         "name": "MentionsPage",
@@ -280,7 +280,7 @@
             "ofType": "MentionsPage"
           }
         ],
-        "description": "Represents a paginated list of tweets mentioning a user."
+        "description": "Represents a page within a paginated collection of tweets mentioning a user."
       },
       {
         "name": "LikedCollection",
@@ -302,7 +302,7 @@
             ]
           }
         ],
-        "description": "Manages the collection and pagination of tweets liked by a user."
+        "description": "Manages collections and pagination of tweets liked by a user."
       },
       {
         "name": "LikedPage",
@@ -318,7 +318,7 @@
             "ofType": "LikedPage"
           }
         ],
-        "description": "Represents a paginated list of tweets liked by a user."
+        "description": "Represents a page within a paginated collection of tweets liked by a user."
       },
       {
         "name": "LikingCollection",
@@ -340,7 +340,7 @@
             ]
           }
         ],
-        "description": "Handles the collection and pagination of users who liked a specific tweet."
+        "description": "Handles collections and pagination of users who liked a specific tweet."
       },
       {
         "name": "LikingPage",
@@ -356,7 +356,7 @@
             "ofType": "LikingPage"
           }
         ],
-        "description": "Represents a paginated list of users who liked a specific tweet."
+        "description": "Represents a page within a paginated collection of users who liked a specific tweet."
       },
       {
         "name": "User",
@@ -393,7 +393,7 @@
             "type": "LikedCollection"
           }
         ],
-        "description": "Defines a Twitter user and provides access to their tweets, followers, mentions, and liked tweets."
+        "description": "Describes a Twitter user and provides access to their tweets, followers, mentions, and liked tweets."
       },
       {
         "name": "Tweet",
@@ -417,11 +417,11 @@
             "description": "Collection of users who have liked the tweet."
           }
         ],
-        "description": "Represents a tweet and provides access to liking users."
+        "description": "Describes a tweet and provides access to the users who liked it."
       },
       {
         "name": "MaxRedirectsError",
-        "description": "Error type indicating that the maximum number of redirects has been reached."
+        "description": "Indicates an error when the maximum number of redirects is reached."
       },
       {
         "name": "Tests",
@@ -431,7 +431,7 @@
             "type": "Boolean"
           }
         ],
-        "description": "Provides a suite of tests for verifying the functionality of the Twitter driver."
+        "description": "Contains tests to verify the functionality of the Twitter driver."
       }
     ]
   },
