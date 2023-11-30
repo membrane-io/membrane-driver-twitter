@@ -17,7 +17,7 @@
     "types": [
       {
         "name": "Root",
-        "description": "Root type represents the entry point for the Twitter driver, providing actions to interact with Twitter API.",
+        "description": "Root type is the entry point for the Twitter driver, providing actions to interact with the Twitter API.",
         "actions": [
           {
             "name": "tweet",
@@ -181,7 +181,7 @@
             ]
           }
         ],
-        "description": "TweetCollection type manages a collection of tweets, allowing retrieval of individual tweets or pages of tweets."
+        "description": "TweetCollection manages a collection of tweets, allowing retrieval of individual tweets or pages of tweets."
       },
       {
         "name": "TweetPage",
@@ -197,7 +197,7 @@
             "ofType": "TweetPage"
           }
         ],
-        "description": "TweetPage type represents a paginated collection of tweets, providing navigation to the next page."
+        "description": "TweetPage represents a paginated collection of tweets, providing navigation to the next page."
       },
       {
         "name": "FollowersCollection",
@@ -224,7 +224,7 @@
             ]
           }
         ],
-        "description": "FollowersCollection type manages a collection of followers, allowing retrieval of pages of followers."
+        "description": "FollowersCollection manages a collection of followers, allowing retrieval of pages of followers."
       },
       {
         "name": "FollowersPage",
@@ -240,7 +240,7 @@
             "ofType": "FollowersPage"
           }
         ],
-        "description": "FollowersPage type represents a paginated collection of followers, providing navigation to the next page."
+        "description": "FollowersPage represents a paginated collection of followers, providing navigation to the next page."
       },
       {
         "name": "MentionsCollection",
@@ -267,7 +267,7 @@
             ]
           }
         ],
-        "description": "MentionsCollection type manages a collection of mentions, allowing retrieval of pages of mentions."
+        "description": "MentionsCollection manages a collection of mentions, allowing retrieval of pages of mentions."
       },
       {
         "name": "MentionsPage",
@@ -283,7 +283,7 @@
             "ofType": "MentionsPage"
           }
         ],
-        "description": "MentionsPage type represents a paginated collection of mentions, providing navigation to the next page."
+        "description": "MentionsPage represents a paginated collection of mentions, providing navigation to the next page."
       },
       {
         "name": "LikedCollection",
@@ -305,7 +305,7 @@
             ]
           }
         ],
-        "description": "LikedCollection type manages a collection of liked tweets, allowing retrieval of pages of liked tweets."
+        "description": "LikedCollection manages a collection of liked tweets, allowing retrieval of pages of liked tweets."
       },
       {
         "name": "LikedPage",
@@ -321,7 +321,7 @@
             "ofType": "LikedPage"
           }
         ],
-        "description": "LikedPage type represents a paginated collection of liked tweets, providing navigation to the next page."
+        "description": "LikedPage represents a paginated collection of liked tweets, providing navigation to the next page."
       },
       {
         "name": "LikingCollection",
@@ -343,7 +343,7 @@
             ]
           }
         ],
-        "description": "LikingCollection type manages a collection of users who liked a tweet, allowing retrieval of pages of such users."
+        "description": "LikingCollection manages a collection of users who liked a tweet, allowing retrieval of pages of such users."
       },
       {
         "name": "LikingPage",
@@ -359,7 +359,7 @@
             "ofType": "LikingPage"
           }
         ],
-        "description": "LikingPage type represents a paginated collection of users who liked a tweet, providing navigation to the next page."
+        "description": "LikingPage represents a paginated collection of users who liked a tweet, providing navigation to the next page."
       },
       {
         "name": "User",
