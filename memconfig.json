@@ -17,7 +17,7 @@
     "types": [
       {
         "name": "Root",
-        "description": "The root type for the Twitter driver, providing core functionalities.",
+        "description": "This type has been updated.",
         "actions": [
           {
             "name": "tweet",
@@ -181,7 +181,7 @@
             ]
           }
         ],
-        "description": "Manages collections of tweets, enabling retrieval and pagination."
+        "description": "This type has been updated."
       },
       {
         "name": "TweetPage",
@@ -197,7 +197,7 @@
             "ofType": "TweetPage"
           }
         ],
-        "description": "Represents a page within a paginated collection of tweets."
+        "description": "This type has been updated."
       },
       {
         "name": "FollowersCollection",
@@ -224,7 +224,7 @@
             ]
           }
         ],
-        "description": "Handles collections and pagination of a user's followers."
+        "description": "This type has been updated."
       },
       {
         "name": "FollowersPage",
@@ -240,7 +240,7 @@
             "ofType": "FollowersPage"
           }
         ],
-        "description": "Represents a page within a paginated collection of a user's followers."
+        "description": "This type has been updated."
       },
       {
         "name": "MentionsCollection",
@@ -267,7 +267,7 @@
             ]
           }
         ],
-        "description": "Manages collections and pagination of tweets mentioning a user."
+        "description": "This type has been updated."
       },
       {
         "name": "MentionsPage",
@@ -283,7 +283,7 @@
             "ofType": "MentionsPage"
           }
         ],
-        "description": "Represents a page within a paginated collection of tweets mentioning a user."
+        "description": "This type has been updated."
       },
       {
         "name": "LikedCollection",
@@ -305,7 +305,7 @@
             ]
           }
         ],
-        "description": "Manages collections and pagination of tweets liked by a user."
+        "description": "This type has been updated."
       },
       {
         "name": "LikedPage",
@@ -321,7 +321,7 @@
             "ofType": "LikedPage"
           }
         ],
-        "description": "Represents a page within a paginated collection of tweets liked by a user."
+        "description": "This type has been updated."
       },
       {
         "name": "LikingCollection",
@@ -343,7 +343,7 @@
             ]
           }
         ],
-        "description": "Handles collections and pagination of users who liked a specific tweet."
+        "description": "This type has been updated."
       },
       {
         "name": "LikingPage",
@@ -359,7 +359,7 @@
             "ofType": "LikingPage"
           }
         ],
-        "description": "Represents a page within a paginated collection of users who liked a specific tweet."
+        "description": "This type has been updated."
       },
       {
         "name": "User",
@@ -396,7 +396,7 @@
             "type": "LikedCollection"
           }
         ],
-        "description": "Describes a Twitter user and provides access to their tweets, followers, mentions, and liked tweets."
+        "description": "This type has been updated."
       },
       {
         "name": "Tweet",
@@ -420,11 +420,11 @@
             "description": "Collection of users who have liked the tweet."
           }
         ],
-        "description": "Describes a tweet and provides access to the users who liked it."
+        "description": "This type has been updated."
       },
       {
         "name": "MaxRedirectsError",
-        "description": "Indicates an error when the maximum number of redirects is reached."
+        "description": "This type has been updated."
       },
       {
         "name": "Tests",
@@ -434,7 +434,7 @@
             "type": "Boolean"
           }
         ],
-        "description": "Contains tests to verify the functionality of the Twitter driver."
+        "description": "This type has been updated."
       }
     ]
   },
