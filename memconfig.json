@@ -39,7 +39,8 @@
                 "description": "Duration of the poll in minutes for a Tweet with a poll.",
                 "optional": true
               }
-            ]
+            ],
+            "description": "Action to post a new tweet with the specified text and optional poll options."
           },
           {
             "name": "endpoint",
@@ -70,7 +71,8 @@
                 "name": "headers",
                 "type": "String"
               }
-            ]
+            ],
+            "description": "Internal action to interact with the Twitter API endpoint."
           },
           {
             "name": "configure",
@@ -84,7 +86,8 @@
                 "name": "clientId",
                 "type": "String"
               }
-            ]
+            ],
+            "description": "Action to configure the Twitter driver with client credentials."
           }
         ],
         "fields": [
@@ -103,18 +106,18 @@
                 "optional": true
               }
             ],
-            "description": "Posts a new tweet with the specified text and optional poll."
+            "description": "Field representing a Twitter user, providing access to their tweets, followers, mentions, and liked tweets."
           },
           {
             "name": "status",
             "type": "String",
-            "description": "Internal action to interact with the Twitter API endpoint."
+            "description": "Internal field to interact with the Twitter API endpoint."
           },
           {
             "name": "tweets",
             "type": "TweetCollection",
             "params": [],
-            "description": "Configures the Twitter driver with client credentials."
+            "description": "Field to manage a collection of tweets, allowing retrieval of individual tweets or pages of tweets."
           },
           {
             "name": "parse",
@@ -135,17 +138,20 @@
                 "name": "value",
                 "type": "String"
               }
-            ]
+            ],
+            "description": "Field to parse and process tweet data."
           },
           {
             "name": "tests",
-            "type": "Tests"
+            "type": "Tests",
+            "description": "Field to test various functionalities of the Twitter driver."
           }
         ],
         "events": [
           {
             "name": "statusChanged",
-            "type": "Void"
+            "type": "Void",
+            "description": "Event triggered when the status of the Twitter driver changes."
           }
         ]
       },
@@ -161,7 +167,8 @@
                 "type": "String",
                 "description": "The tweet id"
               }
-            ]
+            ],
+            "description": "Retrieves a single tweet by its unique identifier."
           },
           {
             "name": "page",
@@ -178,7 +185,8 @@
                 "description": "Returns results with a Tweet ID less than (that is, older than) the specified ID. The ID specified is exclusive and responses will not include it.",
                 "optional": true
               }
-            ]
+            ],
+            "description": "Retrieves a page of tweets based on the specified query and optional pagination token."
           }
         ],
         "description": "TweetCollection manages a collection of tweets, allowing retrieval of individual tweets or pages of tweets."
@@ -189,12 +197,14 @@
           {
             "name": "items",
             "type": "List",
-            "ofType": "Tweet"
+            "ofType": "Tweet",
+            "description": "A list of tweets included in the current page."
           },
           {
             "name": "next",
             "type": "Ref",
-            "ofType": "TweetPage"
+            "ofType": "TweetPage",
+            "description": "A reference to the next page of tweets, allowing for pagination."
           }
         ],
         "description": "TweetPage represents a paginated collection of tweets, providing navigation to the next page."
@@ -221,7 +231,8 @@
                 "type": "String",
                 "optional": true
               }
-            ]
+            ],
+            "description": "Retrieves a page of followers with optional pagination token, maximum results, and starting point."
           }
         ],
         "description": "FollowersCollection manages a collection of followers, allowing retrieval of pages of followers."
@@ -232,12 +243,14 @@
           {
             "name": "items",
             "type": "List",
-            "ofType": "User"
+            "ofType": "User",
+            "description": "A list of user profiles representing the followers included in the current page."
           },
           {
             "name": "next",
             "type": "Ref",
-            "ofType": "FollowersPage"
+            "ofType": "FollowersPage",
+            "description": "A reference to the next page of followers, allowing for pagination."
           }
         ],
         "description": "FollowersPage represents a paginated collection of followers, providing navigation to the next page."
@@ -264,7 +277,8 @@
                 "type": "String",
                 "optional": true
               }
-            ]
+            ],
+            "description": "Retrieves a page of mentions with optional pagination token, maximum results, and starting point."
           }
         ],
         "description": "MentionsCollection manages a collection of mentions, allowing retrieval of pages of mentions."
@@ -275,12 +289,14 @@
           {
             "name": "items",
             "type": "List",
-            "ofType": "Tweet"
+            "ofType": "Tweet",
+            "description": "A list of tweets included in the current page that mention the user."
           },
           {
             "name": "next",
             "type": "Ref",
-            "ofType": "MentionsPage"
+            "ofType": "MentionsPage",
+            "description": "A reference to the next page of mentions, allowing for pagination."
           }
         ],
         "description": "MentionsPage represents a paginated collection of mentions, providing navigation to the next page."
@@ -302,7 +318,8 @@
                 "type": "String",
                 "optional": true
               }
-            ]
+            ],
+            "description": "Retrieves a page of liked tweets with optional pagination token and maximum results."
           }
         ],
         "description": "LikedCollection manages a collection of liked tweets, allowing retrieval of pages of liked tweets."
