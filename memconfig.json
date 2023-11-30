@@ -17,7 +17,7 @@
     "types": [
       {
         "name": "Root",
-        "description": "This type has been updated.",
+        "description": "Root type represents the entry point for the Twitter driver, providing actions to interact with Twitter API.",
         "actions": [
           {
             "name": "tweet",
@@ -181,7 +181,7 @@
             ]
           }
         ],
-        "description": "This type has been updated."
+        "description": "TweetCollection type manages a collection of tweets, allowing retrieval of individual tweets or pages of tweets."
       },
       {
         "name": "TweetPage",
@@ -197,7 +197,7 @@
             "ofType": "TweetPage"
           }
         ],
-        "description": "This type has been updated."
+        "description": "TweetPage type represents a paginated collection of tweets, providing navigation to the next page."
       },
       {
         "name": "FollowersCollection",
@@ -224,7 +224,7 @@
             ]
           }
         ],
-        "description": "This type has been updated."
+        "description": "FollowersCollection type manages a collection of followers, allowing retrieval of pages of followers."
       },
       {
         "name": "FollowersPage",
@@ -240,7 +240,7 @@
             "ofType": "FollowersPage"
           }
         ],
-        "description": "This type has been updated."
+        "description": "FollowersPage type represents a paginated collection of followers, providing navigation to the next page."
       },
       {
         "name": "MentionsCollection",
@@ -267,7 +267,7 @@
             ]
           }
         ],
-        "description": "This type has been updated."
+        "description": "MentionsCollection type manages a collection of mentions, allowing retrieval of pages of mentions."
       },
       {
         "name": "MentionsPage",
@@ -283,7 +283,7 @@
             "ofType": "MentionsPage"
           }
         ],
-        "description": "This type has been updated."
+        "description": "MentionsPage type represents a paginated collection of mentions, providing navigation to the next page."
       },
       {
         "name": "LikedCollection",
@@ -305,7 +305,7 @@
             ]
           }
         ],
-        "description": "This type has been updated."
+        "description": "LikedCollection type manages a collection of liked tweets, allowing retrieval of pages of liked tweets."
       },
       {
         "name": "LikedPage",
@@ -321,7 +321,7 @@
             "ofType": "LikedPage"
           }
         ],
-        "description": "This type has been updated."
+        "description": "LikedPage type represents a paginated collection of liked tweets, providing navigation to the next page."
       },
       {
         "name": "LikingCollection",
@@ -343,7 +343,7 @@
             ]
           }
         ],
-        "description": "This type has been updated."
+        "description": "LikingCollection type manages a collection of users who liked a tweet, allowing retrieval of pages of such users."
       },
       {
         "name": "LikingPage",
@@ -359,7 +359,7 @@
             "ofType": "LikingPage"
           }
         ],
-        "description": "This type has been updated."
+        "description": "LikingPage type represents a paginated collection of users who liked a tweet, providing navigation to the next page."
       },
       {
         "name": "User",
@@ -396,7 +396,7 @@
             "type": "LikedCollection"
           }
         ],
-        "description": "This type has been updated."
+        "description": "User type represents a Twitter user, providing access to their tweets, followers, mentions, and liked tweets."
       },
       {
         "name": "Tweet",
@@ -420,11 +420,11 @@
             "description": "Collection of users who have liked the tweet."
           }
         ],
-        "description": "This type has been updated."
+        "description": "Tweet type represents an individual tweet, providing access to its content and users who liked it."
       },
       {
         "name": "MaxRedirectsError",
-        "description": "This type has been updated."
+        "description": "MaxRedirectsError type represents an error that occurs when the maximum number of redirects is exceeded during an API call."
       },
       {
         "name": "Tests",
@@ -434,7 +434,7 @@
             "type": "Boolean"
           }
         ],
-        "description": "This type has been updated."
+        "description": "Tests type provides actions to test various functionalities of the Twitter driver."
       }
     ]
   },
