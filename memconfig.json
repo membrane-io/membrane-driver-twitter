@@ -400,21 +400,24 @@
         "fields": [
           {
             "name": "id",
-            "type": "String"
+            "type": "String",
+            "description": "The unique identifier of the tweet."
           },
           {
             "name": "text",
             "type": "String",
             "hints": {
               "primary": true
-            }
+            },
+            "description": "The content of the tweet."
           },
           {
             "name": "likingUsers",
-            "type": "LikingCollection"
+            "type": "LikingCollection",
+            "description": "Collection of users who have liked the tweet."
           }
         ],
-        "description": "Represents an individual tweet and provides access to the users who have liked it."
+        "description": "Represents a tweet and provides access to liking users."
       },
       {
         "name": "MaxRedirectsError",
