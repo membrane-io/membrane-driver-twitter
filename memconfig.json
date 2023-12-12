@@ -17,7 +17,7 @@
     "types": [
       {
         "name": "Root",
-        "description": "Root type is the entry point for the Twitter driver, providing actions to interact with the Twitter API.",
+        "description": "Driver to interact with Twitter",
         "actions": [
           {
             "name": "tweet",
